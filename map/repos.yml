@@ -15,6 +15,12 @@ repos:
     icon: file
     what: The open .knode specification
     group: product
+  - name: cloud
+    icon: cloud
+    what: Knode Cloud
+    group: product
+    uses: [knode]
+    planned: v0.4
   - name: homebrew-tap
     icon: terminal
     what: brew install
@@ -25,12 +31,6 @@ repos:
     what: knode.md
     group: alongside
     uses: [brand]
-  - name: cloud
-    icon: cloud
-    what: Knode Cloud
-    group: alongside
-    uses: [knode]
-    planned: v0.4
   - name: brand
     icon: node
     what: The Knode brand

@@ -19,6 +19,7 @@ import yaml
 ORG = "knodemd"
 ROOT = Path(__file__).resolve().parent
 OUT = ROOT.parent / "profile"
+README = OUT / "README.md"
 
 THEMES = {
     # name: (box fill, text, muted text, box line, product line, arrows)
@@ -126,7 +127,35 @@ def main():
 {labels}{lines}{"".join(boxes)}</svg>
 '''
         (OUT / f"map-{theme}.svg").write_text(svg)
-    print(f"wrote profile/map-dark.svg and profile/map-light.svg: {len(repos)} repositories")
+    # one clickable card per repository, since links inside an image are not allowed on GitHub
+    (OUT / "repos").mkdir(exist_ok=True)
+    for old in (OUT / "repos").glob("*.svg"):
+        old.unlink()
+    CW, CH = 320, 76
+    cells = []
+    for r in repos:
+        slug = r["name"].lstrip(".") or r["name"]
+        for theme, (fill, text, muted, line, product, arrow) in THEMES.items():
+            planned = r.get("planned")
+            stroke = product if r.get("group") == "product" else line
+            dash = ' stroke-dasharray="7 6"' if planned else ""
+            tag = f' <tspan fill="{INDIGO}">{escape(planned)}</tspan>' if planned else ""
+            card = (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {CW} {CH}" width="{CW}" height="{CH}" role="img" aria-label="{escape(r["name"])}">'
+                    f'<style>{font("KnodeLine")}.n{{font:16px "KnodeLine",monospace;fill:{text}}}.d{{font:13px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:{muted}}}</style>'
+                    f'<rect x="1" y="1" width="{CW - 2}" height="{CH - 2}" rx="14" fill="{fill}" stroke="{stroke}" stroke-width="1.6"{dash}/>'
+                    f'<text x="20" y="33" class="n">{escape(r["name"].upper())}</text>'
+                    f'<text x="20" y="55" class="d">{escape(r["what"])}{tag}</text></svg>\n')
+            (OUT / "repos" / f"{slug}-{theme}.svg").write_text(card)
+        link = f"https://github.com/{ORG}/{r['name']}" if r["name"] in existing else f"https://github.com/{ORG}"
+        cells.append(f'<a href="{link}"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/{slug}-dark.svg">'
+                     f'<img src="repos/{slug}-light.svg" alt="{escape(r["name"])}: {escape(r["what"])}" width="260"></picture></a>')
+    rows_html = "\n".join("<p>\n" + "\n".join(cells[i:i + 3]) + "\n</p>" for i in range(0, len(cells), 3))
+    readme = README.read_text()
+    start, end = "<!-- repos:start -->", "<!-- repos:end -->"
+    if start in readme and end in readme:
+        before, rest = readme.split(start, 1)
+        README.write_text(before + start + "\n" + rows_html + "\n" + end + rest.split(end, 1)[1])
+    print(f"wrote the map, {len(repos)} repository cards and the profile list")
 
 
 if __name__ == "__main__":

@@ -32,10 +32,7 @@ Please don't add new colours, typefaces or icon styles; propose them in an issue
 
 ## Licence
 
-By contributing, you agree that your contribution is licensed under the licence of the repository you contribute to.
-
-- Code (apps, CLI, SDKs, websites): [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
-- Docs (handbook, these community files, the `.knode` specification): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
-- Brand files and the Knode typefaces: the [Knode Brand Licence](https://github.com/knodemd/brand/blob/main/BRAND-LICENSE.md), all rights reserved. Contributing to them is welcome; your contribution joins the brand under that licence.
-
+Knode's repositories are licensed under [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0):
+by contributing, you agree that your contribution is licensed under it too. The Knode name, logo,
+icons and typefaces are reserved under the [Knode Brand License](https://github.com/knodemd/brand-license).
 See [decision 0003](https://github.com/knodemd/handbook/blob/main/decisions/0003-licences.md).

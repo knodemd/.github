@@ -61,7 +61,7 @@ Knode is in early development and **built in public**: every decision, issue and
 Everything happens here, in the open. Three steps to your first contribution:
 
 <p>
-  <a href="https://knode.md/handbook"><img src="buttons/step-handbook.svg" alt="1. Read the handbook" height="48"></a>&nbsp;
-  <a href="https://github.com/search?q=org%3Aknodemd+label%3A%22good+first+issue%22+state%3Aopen&type=issues"><img src="buttons/step-issue.svg" alt="2. Pick a first issue" height="48"></a>&nbsp;
-  <a href="https://github.com/knodemd/.github/blob/main/CONTRIBUTING.md"><img src="buttons/step-pr.svg" alt="3. Open a pull request" height="48"></a>
+  <a href="https://knode.md/handbook"><img src="buttons/step-handbook.svg" alt="1. Read the handbook" height="40"></a>&nbsp;
+  <a href="https://github.com/search?q=org%3Aknodemd+label%3A%22good+first+issue%22+state%3Aopen&type=issues"><img src="buttons/step-issue.svg" alt="2. Pick a first issue" height="40"></a>&nbsp;
+  <a href="https://github.com/knodemd/.github/blob/main/CONTRIBUTING.md"><img src="buttons/step-pr.svg" alt="3. Open a pull request" height="40"></a>
 </p>

@@ -29,9 +29,9 @@ jobs:
       - name: Commit the map when it changed
         if: github.event_name != 'pull_request'
         run: |
-          if git diff --quiet -- profile/map.svg; then exit 0; fi
+          if git diff --quiet -- profile/map-dark.svg profile/map-light.svg; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/map.svg
+          git add profile/map-dark.svg profile/map-light.svg
           git commit -m "chore(map): redraw the repository map"
           git push

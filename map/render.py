@@ -31,6 +31,8 @@ THEMES = {
 }
 INDIGO = "#818CF8"
 W, H, GAP_X, GAP_Y, PAD, TOP = 290, 66, 28, 64, 48, 112
+# no side margin, so the map lines up with the repository cards below it
+PAD_X = 2
 
 
 def org_repos():
@@ -85,16 +87,16 @@ def main():
     for c, members in sorted(cols.items()):
         top = TOP + (tallest - len(members)) * (H + GAP_Y / 2) / 2
         for i, r in enumerate(members):
-            pos[r["name"]] = (PAD + c * (W + 90), top + i * (H + GAP_Y / 2))
-    width = PAD * 2 + len(cols) * W + (len(cols) - 1) * 90
+            pos[r["name"]] = (PAD_X + c * (W + 90), top + i * (H + GAP_Y / 2))
+    width = PAD_X * 2 + len(cols) * W + (len(cols) - 1) * 90
     y = TOP + tallest * (H + GAP_Y / 2) + 40
     rows.append(("PROJECT", y))
     # the project row stretches to the same width as the columns above
-    span = width - PAD * 2
+    span = width - PAD_X * 2
     aw = (span - (len(alone) - 1) * GAP_X) / len(alone) if alone else W
     widths = {}
     for i, r in enumerate(alone):
-        pos[r["name"]] = (PAD + i * (aw + GAP_X), y)
+        pos[r["name"]] = (PAD_X + i * (aw + GAP_X), y)
         widths[r["name"]] = aw
     height = y + H + PAD + 44
     rows.insert(0, ("REPOSITORIES BY WHAT THEY USE", TOP))
@@ -128,20 +130,20 @@ def main():
                 f'<text x="{x + 56}" y="{y + 28}" class="n">{escape(r["name"].upper())}</text>'
                 f'<text x="{x + 56}" y="{y + 48}" class="d">{escape(r["what"])}{tag}</text>'
             )
-        labels = "".join(f'<text x="{PAD}" y="{y - 14}" class="g">{label}</text>' for label, y in rows)
+        labels = "".join(f'<text x="{PAD_X}" y="{y - 14}" class="g">{label}</text>' for label, y in rows)
         ly = height - 30
         labels += (f'<g class="d">'
-                   f'<rect x="{PAD}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{product}" stroke-width="1.6"/><text x="{PAD + 36}" y="{ly + 1}">Product</text>'
-                   f'<rect x="{PAD + 120}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{muted}" stroke-width="1.6"/><text x="{PAD + 156}" y="{ly + 1}">Exists</text>'
-                   f'<rect x="{PAD + 232}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{muted}" stroke-width="1.6" stroke-dasharray="5 4"/><text x="{PAD + 268}" y="{ly + 1}">Planned, with its version</text>'
-                   f'<path d="M{PAD + 470} {ly - 4}L{PAD + 506} {ly - 4}" stroke="{arrow}" stroke-width="1.6" marker-end="url(#a)"/><text x="{PAD + 518}" y="{ly + 1}">Uses</text></g>')
+                   f'<rect x="{PAD_X}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{product}" stroke-width="1.6"/><text x="{PAD_X + 36}" y="{ly + 1}">Product</text>'
+                   f'<rect x="{PAD_X + 120}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{muted}" stroke-width="1.6"/><text x="{PAD_X + 156}" y="{ly + 1}">Exists</text>'
+                   f'<rect x="{PAD_X + 232}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{muted}" stroke-width="1.6" stroke-dasharray="5 4"/><text x="{PAD_X + 268}" y="{ly + 1}">Planned, with its version</text>'
+                   f'<path d="M{PAD_X + 470} {ly - 4}L{PAD_X + 506} {ly - 4}" stroke="{arrow}" stroke-width="1.6" marker-end="url(#a)"/><text x="{PAD_X + 518}" y="{ly + 1}">Uses</text></g>')
         lines = "".join(e.replace("MUTED_STROKE", arrow) for e in edges)
         svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-label="The repositories of Knode and how they depend on each other">
 <style>{font("KnodeLine")}{font("KnodeBlock")}
 .t{{font:24px "KnodeBlock",monospace;fill:{text}}}.g{{font:13px "KnodeLine",monospace;fill:{muted};letter-spacing:.06em}}
 .n{{font:15px "KnodeLine",monospace;fill:{text}}}.d{{font:13px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:{muted}}}</style>
 <defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="{arrow}"/></marker></defs>
-<text x="{PAD}" y="62" class="t">KNODE REPOSITORIES</text>
+<text x="{PAD_X}" y="62" class="t">KNODE REPOSITORIES</text>
 {labels}{lines}{"".join(boxes)}</svg>
 '''
         (OUT / f"map-{theme}.svg").write_text(svg)

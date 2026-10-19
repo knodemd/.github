@@ -1,47 +1,47 @@
 # Every repository of knodemd, what it is, and what it uses.
 # The map fails when a repository of the organisation is missing here, so add new ones first.
-#   group:   product marks the product repositories (drawn in indigo)
+#   group:   product, alongside, design or project: the sections of the profile list; product is drawn in indigo
 #   uses:    repositories this one depends on (draws an arrow; the map places it to their right)
 #   planned: the version it arrives in, while it does not exist yet
 #   icon:    a Knode icon, by its name in map/icons.json (copied from knodemd/brand)
 
 repos:
-  - name: format
-    icon: file
-    what: The open .knode specification
-    group: product
   - name: knode
     icon: knode
     what: Rust core, Mac, iPhone and web
     group: product
     uses: [format, brand]
-  - name: cloud
-    icon: cloud
-    what: Knode Cloud
-    group: outside
-    uses: [knode]
-    planned: v0.4
+  - name: format
+    icon: file
+    what: The open .knode specification
+    group: product
   - name: homebrew-tap
     icon: terminal
     what: brew install
-    group: outside
+    group: alongside
     uses: [knode]
   - name: web
     icon: web
     what: knode.md
-    group: outside
+    group: alongside
     uses: [brand]
+  - name: cloud
+    icon: cloud
+    what: Knode Cloud
+    group: alongside
+    uses: [knode]
+    planned: v0.4
   - name: brand
     icon: node
     what: The Knode brand
     group: design
-  - name: brand-license
-    icon: private
-    what: Knode Brand License
-    group: project
   - name: handbook
     icon: note
     what: How Knode works
+    group: project
+  - name: brand-license
+    icon: private
+    what: Knode Brand License
     group: project
   - name: .github
     icon: people

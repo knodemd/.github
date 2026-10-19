@@ -30,7 +30,7 @@ THEMES = {
     "light": ("#FFFFFF", "#0B0B14", "#5E5D73", "#DAD8E2", "#0B0B14", "#5E5D73"),
 }
 INDIGO = "#818CF8"
-W, H, GAP_X, GAP_Y, PAD, TOP = 230, 66, 28, 64, 48, 112
+W, H, GAP_X, GAP_Y, PAD, TOP = 260, 66, 28, 64, 48, 112
 
 
 def org_repos():
@@ -92,7 +92,7 @@ def main():
     for i, r in enumerate(alone):
         pos[r["name"]] = (PAD + i * (W + GAP_X), y)
     width = max(width, PAD * 2 + len(alone) * W + (len(alone) - 1) * GAP_X)
-    height = y + H + PAD
+    height = y + H + PAD + 44
     rows.insert(0, ("REPOSITORIES BY WHAT THEY USE", TOP))
 
     edges = []
@@ -106,6 +106,8 @@ def main():
             dash = ' stroke-dasharray="6 6"' if planned else ""
             edges.append(f'<path d="{d}" fill="none" stroke="MUTED_STROKE" stroke-width="1.6"{dash} marker-end="url(#a)"/>')
 
+    icons = json.loads((ROOT / "icons.json").read_text())["icons"]
+    by_kebab = {k.lower().replace(" ", "-"): v for k, v in icons.items()}
     for theme, (fill, text, muted, line, product, arrow) in THEMES.items():
         boxes = []
         for r in repos:
@@ -114,12 +116,20 @@ def main():
             stroke = product if r.get("group") == "product" else line
             dash = ' stroke-dasharray="7 6"' if planned else ""
             tag = f' <tspan fill="{INDIGO}">{escape(planned)}</tspan>' if planned else ""
+            glyph = path_d(by_kebab.get(r.get("icon", "node"), by_kebab["node"]), .5)
             boxes.append(
                 f'<rect x="{x}" y="{y}" width="{W}" height="{H}" rx="14" fill="{fill}" stroke="{stroke}" stroke-width="1.6"{dash}/>'
-                f'<text x="{x + 18}" y="{y + 28}" class="n">{escape(r["name"].upper())}</text>'
-                f'<text x="{x + 18}" y="{y + 48}" class="d">{escape(r["what"])}{tag}</text>'
+                f'<g transform="translate({x + 16} {y + 19}) scale({28 / 7})"><path d="{glyph}" fill="{INDIGO if r.get("group") == "product" else text}" fill-rule="evenodd"/></g>'
+                f'<text x="{x + 56}" y="{y + 28}" class="n">{escape(r["name"].upper())}</text>'
+                f'<text x="{x + 56}" y="{y + 48}" class="d">{escape(r["what"])}{tag}</text>'
             )
         labels = "".join(f'<text x="{PAD}" y="{y - 14}" class="g">{label}</text>' for label, y in rows)
+        ly = height - 30
+        labels += (f'<g class="d">'
+                   f'<rect x="{PAD}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{product}" stroke-width="1.6"/><text x="{PAD + 36}" y="{ly + 1}">Product</text>'
+                   f'<rect x="{PAD + 120}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{muted}" stroke-width="1.6"/><text x="{PAD + 156}" y="{ly + 1}">Exists</text>'
+                   f'<rect x="{PAD + 232}" y="{ly - 12}" width="26" height="16" rx="5" fill="none" stroke="{muted}" stroke-width="1.6" stroke-dasharray="5 4"/><text x="{PAD + 268}" y="{ly + 1}">Planned, with its version</text>'
+                   f'<path d="M{PAD + 470} {ly - 4}L{PAD + 506} {ly - 4}" stroke="{arrow}" stroke-width="1.6" marker-end="url(#a)"/><text x="{PAD + 518}" y="{ly + 1}">Uses</text></g>')
         lines = "".join(e.replace("MUTED_STROKE", arrow) for e in edges)
         svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-label="The repositories of Knode and how they depend on each other">
 <style>{font("KnodeLine")}{font("KnodeBlock")}
@@ -135,8 +145,6 @@ def main():
     for old in (OUT / "repos").glob("*.svg"):
         old.unlink()
     CW, CH = 420, 64
-    icons = json.loads((ROOT / "icons.json").read_text())["icons"]
-    by_kebab = {k.lower().replace(" ", "-"): v for k, v in icons.items()}
     cells = []
     for r in repos:
         slug = r["name"].lstrip(".") or r["name"]
@@ -158,7 +166,12 @@ def main():
         link = f"https://github.com/{ORG}/{r['name']}" if r["name"] in existing else f"https://github.com/{ORG}"
         cells.append(f'<a href="{link}"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/{slug}-dark.svg">'
                      f'<img src="repos/{slug}-light.svg" alt="{escape(r["name"])}: {escape(r["what"])}" width="49%"></picture></a>')
-    rows_html = "<p>\n" + "\n".join(cells) + "\n</p>"
+    order = {"product": 0, "alongside": 1, "design": 2, "project": 3}
+    titles = {"product": "Product", "alongside": "Alongside", "design": "Design", "project": "Project"}
+    groups = {}
+    for r, cell in zip(repos, cells):
+        groups.setdefault(r.get("group", "project"), []).append(cell)
+    rows_html = "\n\n".join(f"#### {titles[g]}\n\n<p>\n" + "\n".join(groups[g]) + "\n</p>" for g in sorted(groups, key=lambda g: order.get(g, 9)))
     readme = README.read_text()
     start, end = "<!-- repos:start -->", "<!-- repos:end -->"
     if start in readme and end in readme:

@@ -31,6 +31,7 @@ Knode is in early development and **built in public**: every decision, issue and
 <p>
 <a href="https://github.com/knodemd/knode"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/knode-dark.svg"><img src="repos/knode-light.svg" alt="knode: Rust core, Mac, iPhone and web" width="49%"></picture></a>
 <a href="https://github.com/knodemd/format"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/format-dark.svg"><img src="repos/format-light.svg" alt="format: The open .knode specification" width="49%"></picture></a>
+<a href="https://github.com/knodemd"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/cloud-dark.svg"><img src="repos/cloud-light.svg" alt="cloud: Knode Cloud" width="49%"></picture></a>
 </p>
 
 #### Alongside
@@ -38,7 +39,6 @@ Knode is in early development and **built in public**: every decision, issue and
 <p>
 <a href="https://github.com/knodemd/homebrew-tap"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/homebrew-tap-dark.svg"><img src="repos/homebrew-tap-light.svg" alt="homebrew-tap: brew install" width="49%"></picture></a>
 <a href="https://github.com/knodemd/web"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/web-dark.svg"><img src="repos/web-light.svg" alt="web: knode.md" width="49%"></picture></a>
-<a href="https://github.com/knodemd"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/cloud-dark.svg"><img src="repos/cloud-light.svg" alt="cloud: Knode Cloud" width="49%"></picture></a>
 </p>
 
 #### Design

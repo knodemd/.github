@@ -30,7 +30,7 @@ THEMES = {
     "light": ("#FFFFFF", "#0B0B14", "#5E5D73", "#DAD8E2", "#0B0B14", "#5E5D73"),
 }
 INDIGO = "#818CF8"
-W, H, GAP_X, GAP_Y, PAD, TOP = 260, 66, 28, 64, 48, 112
+W, H, GAP_X, GAP_Y, PAD, TOP = 290, 66, 28, 64, 48, 112
 
 
 def org_repos():
@@ -89,9 +89,13 @@ def main():
     width = PAD * 2 + len(cols) * W + (len(cols) - 1) * 90
     y = TOP + tallest * (H + GAP_Y / 2) + 40
     rows.append(("PROJECT", y))
+    # the project row stretches to the same width as the columns above
+    span = width - PAD * 2
+    aw = (span - (len(alone) - 1) * GAP_X) / len(alone) if alone else W
+    widths = {}
     for i, r in enumerate(alone):
-        pos[r["name"]] = (PAD + i * (W + GAP_X), y)
-    width = max(width, PAD * 2 + len(alone) * W + (len(alone) - 1) * GAP_X)
+        pos[r["name"]] = (PAD + i * (aw + GAP_X), y)
+        widths[r["name"]] = aw
     height = y + H + PAD + 44
     rows.insert(0, ("REPOSITORIES BY WHAT THEY USE", TOP))
 
@@ -112,13 +116,14 @@ def main():
         boxes = []
         for r in repos:
             x, y = pos[r["name"]]
+            bw = widths.get(r["name"], W)
             planned = r.get("planned")
             stroke = product if r.get("group") == "product" else line
             dash = ' stroke-dasharray="7 6"' if planned else ""
             tag = f' <tspan fill="{INDIGO}">{escape(planned)}</tspan>' if planned else ""
             glyph = path_d(by_kebab.get(r.get("icon", "node"), by_kebab["node"]), .5)
             boxes.append(
-                f'<rect x="{x}" y="{y}" width="{W}" height="{H}" rx="14" fill="{fill}" stroke="{stroke}" stroke-width="1.6"{dash}/>'
+                f'<rect x="{x}" y="{y}" width="{bw}" height="{H}" rx="14" fill="{fill}" stroke="{stroke}" stroke-width="1.6"{dash}/>'
                 f'<g transform="translate({x + 16} {y + 19}) scale({28 / 7})"><path d="{glyph}" fill="{INDIGO if r.get("group") == "product" else text}" fill-rule="evenodd"/></g>'
                 f'<text x="{x + 56}" y="{y + 28}" class="n">{escape(r["name"].upper())}</text>'
                 f'<text x="{x + 56}" y="{y + 48}" class="d">{escape(r["what"])}{tag}</text>'

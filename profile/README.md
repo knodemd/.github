@@ -12,7 +12,7 @@
 <p align="center">
   <a href="https://knode.md"><img src="buttons/web.svg" alt="knode.md" height="40"></a>&nbsp;
   <a href="https://github.com/knodemd/handbook"><img src="buttons/handbook.svg" alt="Handbook" height="40"></a>&nbsp;
-  <a href="https://github.com/orgs/knodemd/projects/1"><img src="buttons/roadmap.svg" alt="Roadmap" height="40"></a>&nbsp;
+  <a href="https://github.com/orgs/knodemd/projects/1/views/3"><img src="buttons/roadmap.svg" alt="Roadmap" height="40"></a>&nbsp;
   <a href="https://knode.md/brand"><img src="buttons/brand.svg" alt="Brand" height="40"></a>
 </p>
 

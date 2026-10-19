@@ -51,6 +51,7 @@ Knode is in early development and **built in public**: every decision, issue and
 
 <p>
 <a href="https://github.com/knodemd/handbook"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/handbook-dark.svg"><img src="repos/handbook-light.svg" alt="handbook: How Knode works" width="49%"></picture></a>
+<a href="https://github.com/knodemd/docs"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/docs-dark.svg"><img src="repos/docs-light.svg" alt="docs: How to install and use Knode" width="49%"></picture></a>
 <a href="https://github.com/knodemd/brand-license"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/brand-license-dark.svg"><img src="repos/brand-license-light.svg" alt="brand-license: Knode Brand License" width="49%"></picture></a>
 <a href="https://github.com/knodemd/.github"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/github-dark.svg"><img src="repos/github-light.svg" alt=".github: Profile and this map" width="49%"></picture></a>
 </p>

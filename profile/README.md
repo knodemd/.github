@@ -11,7 +11,7 @@
 
 <p align="center">
   <a href="https://knode.md"><img src="buttons/web.svg" alt="knode.md" height="40"></a>&nbsp;
-  <a href="https://github.com/knodemd/handbook"><img src="buttons/handbook.svg" alt="Handbook" height="40"></a>&nbsp;
+  <a href="https://knode.md/handbook"><img src="buttons/handbook.svg" alt="Handbook" height="40"></a>&nbsp;
   <a href="https://github.com/orgs/knodemd/projects/1/"><img src="buttons/roadmap.svg" alt="Roadmap" height="40"></a>&nbsp;
   <a href="https://knode.md/brand"><img src="buttons/brand.svg" alt="Brand" height="40"></a>
 </p>
@@ -56,11 +56,12 @@ Knode is in early development and **built in public**: every decision, issue and
 </p>
 <!-- repos:end -->
 
-### Want to help?
+### Help build Knode
+
+Everything happens here, in the open. Three steps to your first contribution:
 
 <p>
-  <a href="https://github.com/knodemd/.github/blob/main/CONTRIBUTING.md"><img src="buttons/contribute.svg" alt="Contribute" height="40"></a>&nbsp;
-  <a href="https://github.com/search?q=org%3Aknodemd+label%3A%22good+first+issue%22+state%3Aopen&type=issues"><img src="buttons/first-issues.svg" alt="Good first issues" height="40"></a>
+  <a href="https://knode.md/handbook"><img src="buttons/step-handbook.svg" alt="1. Read the handbook" height="48"></a>&nbsp;
+  <a href="https://github.com/search?q=org%3Aknodemd+label%3A%22good+first+issue%22+state%3Aopen&type=issues"><img src="buttons/step-issue.svg" alt="2. Pick a first issue" height="48"></a>&nbsp;
+  <a href="https://github.com/knodemd/.github/blob/main/CONTRIBUTING.md"><img src="buttons/step-pr.svg" alt="3. Open a pull request" height="48"></a>
 </p>
-
-Start with the [handbook](https://github.com/knodemd/handbook): how Knode is built and why.

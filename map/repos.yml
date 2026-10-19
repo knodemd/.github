@@ -39,6 +39,10 @@ repos:
     icon: note
     what: How Knode works
     group: project
+  - name: docs
+    icon: info
+    what: How to install and use Knode
+    group: project
   - name: brand-license
     icon: private
     what: Knode Brand License

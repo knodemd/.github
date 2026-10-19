@@ -1,0 +1,37 @@
+name: map
+
+# Redraws the repository map on the profile. Fails when a repository is not declared in map/repos.yml.
+on:
+  push:
+    branches: [main]
+    paths: ["map/**", ".github/workflows/map.yml"]
+  pull_request:
+    paths: ["map/**", ".github/workflows/map.yml"]
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  draw:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r map/requirements.txt
+      - run: python map/render.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit the map when it changed
+        if: github.event_name != 'pull_request'
+        run: |
+          if git diff --quiet -- profile/map.svg; then exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add profile/map.svg
+          git commit -m "chore(map): redraw the repository map"
+          git push

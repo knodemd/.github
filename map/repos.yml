@@ -1,0 +1,39 @@
+# Every repository of knodemd, what it is, and what it uses.
+# The map fails when a repository of the organisation is missing here, so add new ones first.
+#   group:   product marks the product repositories (drawn in indigo)
+#   uses:    repositories this one depends on (draws an arrow; the map places it to their right)
+#   planned: the version it arrives in, while it does not exist yet
+
+repos:
+  - name: format
+    what: The open .knode specification
+    group: product
+  - name: knode
+    what: Rust core, Mac, iPhone and web
+    group: product
+    uses: [format, brand]
+  - name: cloud
+    what: Knode Cloud
+    group: outside
+    uses: [knode]
+    planned: v0.4
+  - name: homebrew-tap
+    what: brew install
+    group: outside
+    uses: [knode]
+  - name: web
+    what: knode.md
+    group: outside
+    uses: [brand]
+  - name: brand
+    what: The Knode brand
+    group: design
+  - name: brand-license
+    what: Knode Brand License
+    group: project
+  - name: handbook
+    what: How Knode works
+    group: project
+  - name: .github
+    what: Profile and this map
+    group: project

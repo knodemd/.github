@@ -10,8 +10,8 @@
 </p>
 
 <p align="center">
-  <a href="https://knode.md">knode.md</a> ·
-  <a href="https://github.com/knodemd/handbook">Handbook</a> ·
+  <a href="https://knode.md">knode.md</a>&emsp;
+  <a href="https://github.com/knodemd/handbook">Handbook</a>&emsp;
   <a href="https://github.com/knodemd/brand">Brand</a>
 </p>
 
@@ -23,6 +23,8 @@ Knode is in early development and **built in public**: every decision, issue and
 |---|---|
 | [`handbook`](https://github.com/knodemd/handbook) | How the project works: principles, repositories, how we build, roadmap |
 | [`brand`](https://github.com/knodemd/brand) | The brand kit: logo, colour, type, icons, templates, code |
+| [`web`](https://github.com/knodemd/web) | [knode.md](https://knode.md): the website |
+| [`brand-license`](https://github.com/knodemd/brand-license) | The Knode Brand License and the trademark policy |
 | [`.github`](https://github.com/knodemd/.github) | This profile and the community files shared by every repository |
 
 Want to help? Start with the [handbook](https://github.com/knodemd/handbook) and the [contributing guide](https://github.com/knodemd/.github/blob/main/CONTRIBUTING.md).

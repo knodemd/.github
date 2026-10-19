@@ -1,6 +1,6 @@
 name: map
 
-# Redraws the repository map on the profile. Fails when a repository is not declared in map/repos.yml.
+# Redraws the repository map and the repository cards on the profile. Fails when a repository is not declared in map/repos.yml.
 on:
   push:
     branches: [main]
@@ -29,9 +29,9 @@ jobs:
       - name: Commit the map when it changed
         if: github.event_name != 'pull_request'
         run: |
-          if git diff --quiet -- profile/map-dark.svg profile/map-light.svg; then exit 0; fi
+          if [ -z "$(git status --porcelain -- profile)" ]; then exit 0; fi
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add profile/map-dark.svg profile/map-light.svg
-          git commit -m "chore(map): redraw the repository map"
+          git add profile
+          git commit -m "chore(map): redraw the repository map and cards"
           git push

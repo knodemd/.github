@@ -25,15 +25,22 @@ Knode is in early development and **built in public**: every decision, issue and
   <img src="map-light.svg" alt="The Knode repositories and how they depend on each other" width="100%">
 </picture>
 
-| Repository | What it is |
-|---|---|
-| [`knode`](https://github.com/knodemd/knode) | The product: the Rust core and the Mac, iPhone and web apps |
-| [`format`](https://github.com/knodemd/format) | The open `.knode` specification |
-| [`homebrew-tap`](https://github.com/knodemd/homebrew-tap) | `brew install knodemd/tap/knode` |
-| [`web`](https://github.com/knodemd/web) | [knode.md](https://knode.md): the website |
-| [`brand`](https://github.com/knodemd/brand) | The brand kit |
-| [`brand-license`](https://github.com/knodemd/brand-license) | The Knode Brand License and the trademark policy |
-| [`handbook`](https://github.com/knodemd/handbook) | How the project works: principles, roadmap, decisions |
-| [`.github`](https://github.com/knodemd/.github) | This profile, the shared community files and the map above |
+<!-- repos:start -->
+<p>
+<a href="https://github.com/knodemd/format"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/format-dark.svg"><img src="repos/format-light.svg" alt="format: The open .knode specification" width="260"></picture></a>
+<a href="https://github.com/knodemd/knode"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/knode-dark.svg"><img src="repos/knode-light.svg" alt="knode: Rust core, Mac, iPhone and web" width="260"></picture></a>
+<a href="https://github.com/knodemd"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/cloud-dark.svg"><img src="repos/cloud-light.svg" alt="cloud: Knode Cloud" width="260"></picture></a>
+</p>
+<p>
+<a href="https://github.com/knodemd/homebrew-tap"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/homebrew-tap-dark.svg"><img src="repos/homebrew-tap-light.svg" alt="homebrew-tap: brew install" width="260"></picture></a>
+<a href="https://github.com/knodemd/web"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/web-dark.svg"><img src="repos/web-light.svg" alt="web: knode.md" width="260"></picture></a>
+<a href="https://github.com/knodemd/brand"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/brand-dark.svg"><img src="repos/brand-light.svg" alt="brand: The Knode brand" width="260"></picture></a>
+</p>
+<p>
+<a href="https://github.com/knodemd/brand-license"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/brand-license-dark.svg"><img src="repos/brand-license-light.svg" alt="brand-license: Knode Brand License" width="260"></picture></a>
+<a href="https://github.com/knodemd/handbook"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/handbook-dark.svg"><img src="repos/handbook-light.svg" alt="handbook: How Knode works" width="260"></picture></a>
+<a href="https://github.com/knodemd/.github"><picture><source media="(prefers-color-scheme: dark)" srcset="repos/github-dark.svg"><img src="repos/github-light.svg" alt=".github: Profile and this map" width="260"></picture></a>
+</p>
+<!-- repos:end -->
 
 Want to help? Start with the [handbook](https://github.com/knodemd/handbook) and the [contributing guide](https://github.com/knodemd/.github/blob/main/CONTRIBUTING.md).

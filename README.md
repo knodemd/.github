@@ -1,3 +1,5 @@
+<img src="https://raw.githubusercontent.com/knodemd/brand/main/09%20Banners/Repository%20Previews/PNG/repo-preview-github.png" alt="Knode .github" width="100%">
+
 # .github
 
 The Knode organisation profile and the community files every Knode repository inherits.

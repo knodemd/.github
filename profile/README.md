@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/knodemd/brand/main/02%20Logo/Horizontal/With%20Background/PNG/knode-horizontal-on-ink-2400px.png" alt="Knode" width="640">
+  <img src="https://raw.githubusercontent.com/knodemd/brand/main/02%20Logo/Horizontal/With%20Background/PNG/knode-horizontal-on-indigo-2400px.png" alt="Knode" width="640">
 </p>
 
 <h3 align="center">Connect your thoughts. Naturally.</h3>

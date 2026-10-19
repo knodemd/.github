@@ -33,3 +33,9 @@ Please don't add new colours, typefaces or icon styles; propose them in an issue
 ## Licence
 
 By contributing, you agree that your contribution is licensed under the licence of the repository you contribute to.
+
+- Code (apps, CLI, SDKs, websites): [Apache 2.0](https://www.apache.org/licenses/LICENSE-2.0).
+- Docs (handbook, these community files, the `.knode` specification): [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
+- Brand files: CC BY 4.0; the name and logo follow the [trademark policy](https://github.com/knodemd/brand/blob/main/TRADEMARK.md).
+
+See [decision 0003](https://github.com/knodemd/handbook/blob/main/decisions/0003-licences.md).

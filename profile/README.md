@@ -10,16 +10,20 @@
 </p>
 
 <p align="center">
-  <a href="https://knode.md">knode.md</a>&emsp;
-  <a href="https://github.com/knodemd/handbook">Handbook</a>&emsp;
-  <a href="https://github.com/knodemd/brand">Brand</a>
+  <a href="https://knode.md"><img src="buttons/web.svg" alt="knode.md" height="40"></a>&nbsp;
+  <a href="https://github.com/knodemd/handbook"><img src="buttons/handbook.svg" alt="Handbook" height="40"></a>&nbsp;
+  <a href="https://github.com/knodemd/handbook/blob/main/06-roadmap.md"><img src="buttons/roadmap.svg" alt="Roadmap" height="40"></a>&nbsp;
+  <a href="https://knode.md/brand"><img src="buttons/brand.svg" alt="Brand" height="40"></a>
 </p>
 
 ---
 
 Knode is in early development and **built in public**: every decision, issue and line of code is here from day one.
 
-<img src="map.svg" alt="The Knode repositories and how they depend on each other" width="100%">
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="map-dark.svg">
+  <img src="map-light.svg" alt="The Knode repositories and how they depend on each other" width="100%">
+</picture>
 
 | Repository | What it is |
 |---|---|

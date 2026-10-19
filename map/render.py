@@ -18,9 +18,14 @@ import yaml
 
 ORG = "knodemd"
 ROOT = Path(__file__).resolve().parent
-OUT = ROOT.parent / "profile" / "map.svg"
+OUT = ROOT.parent / "profile"
 
-INK, PAPER, INDIGO, MUTED, LINE, PANEL = "#0B0B14", "#F3F2EE", "#818CF8", "#A3A2BA", "#2A2A44", "#11111C"
+THEMES = {
+    # name: (box fill, text, muted text, box line, product line, arrows)
+    "dark": ("#0B0B14", "#F3F2EE", "#A3A2BA", "#2A2A44", "#818CF8", "#A3A2BA"),
+    "light": ("#FFFFFF", "#0B0B14", "#5E5D73", "#DAD8E2", "#0B0B14", "#5E5D73"),
+}
+INDIGO = "#818CF8"
 W, H, GAP_X, GAP_Y, PAD, TOP = 230, 66, 28, 64, 48, 112
 
 
@@ -95,34 +100,33 @@ def main():
             d = f"M{x1} {y1}C{mx} {y1} {mx} {y2} {x2} {y2}"
             planned = r.get("planned") or by[dep].get("planned")
             dash = ' stroke-dasharray="6 6"' if planned else ""
-            edges.append(f'<path d="{d}" fill="none" stroke="{MUTED}" stroke-width="1.6"{dash} marker-end="url(#a)"/>')
+            edges.append(f'<path d="{d}" fill="none" stroke="MUTED_STROKE" stroke-width="1.6"{dash} marker-end="url(#a)"/>')
 
-    boxes = []
-    for r in repos:
-        x, y = pos[r["name"]]
-        planned = r.get("planned")
-        stroke = INDIGO if r.get("group") == "product" else LINE
-        dash = ' stroke-dasharray="7 6"' if planned else ""
-        tag = f' <tspan fill="{INDIGO}">{escape(planned)}</tspan>' if planned else ""
-        boxes.append(
-            f'<a href="https://github.com/{ORG}/{escape(r["name"])}"><g>'
-            f'<rect x="{x}" y="{y}" width="{W}" height="{H}" rx="14" fill="{INK}" stroke="{stroke}" stroke-width="1.6"{dash}/>'
-            f'<text x="{x + 18}" y="{y + 28}" class="n">{escape(r["name"].upper())}</text>'
-            f'<text x="{x + 18}" y="{y + 48}" class="d">{escape(r["what"])}{tag}</text></g></a>'
-        )
-
-    labels = "".join(f'<text x="{PAD}" y="{y - 14}" class="g">{label}</text>' for label, y in rows)
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-label="The repositories of Knode and how they depend on each other">
+    for theme, (fill, text, muted, line, product, arrow) in THEMES.items():
+        boxes = []
+        for r in repos:
+            x, y = pos[r["name"]]
+            planned = r.get("planned")
+            stroke = product if r.get("group") == "product" else line
+            dash = ' stroke-dasharray="7 6"' if planned else ""
+            tag = f' <tspan fill="{INDIGO}">{escape(planned)}</tspan>' if planned else ""
+            boxes.append(
+                f'<rect x="{x}" y="{y}" width="{W}" height="{H}" rx="14" fill="{fill}" stroke="{stroke}" stroke-width="1.6"{dash}/>'
+                f'<text x="{x + 18}" y="{y + 28}" class="n">{escape(r["name"].upper())}</text>'
+                f'<text x="{x + 18}" y="{y + 48}" class="d">{escape(r["what"])}{tag}</text>'
+            )
+        labels = "".join(f'<text x="{PAD}" y="{y - 14}" class="g">{label}</text>' for label, y in rows)
+        lines = "".join(e.replace("MUTED_STROKE", arrow) for e in edges)
+        svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {width} {height}" width="{width}" height="{height}" role="img" aria-label="The repositories of Knode and how they depend on each other">
 <style>{font("KnodeLine")}{font("KnodeBlock")}
-.t{{font:24px "KnodeBlock",monospace;fill:{PAPER}}}.g{{font:13px "KnodeLine",monospace;fill:{MUTED};letter-spacing:.06em}}
-.n{{font:15px "KnodeLine",monospace;fill:{PAPER}}}.d{{font:13px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:{MUTED}}}</style>
-<defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="{MUTED}"/></marker></defs>
-<rect width="100%" height="100%" rx="20" fill="{PANEL}"/>
+.t{{font:24px "KnodeBlock",monospace;fill:{text}}}.g{{font:13px "KnodeLine",monospace;fill:{muted};letter-spacing:.06em}}
+.n{{font:15px "KnodeLine",monospace;fill:{text}}}.d{{font:13px -apple-system,"Segoe UI",Helvetica,Arial,sans-serif;fill:{muted}}}</style>
+<defs><marker id="a" viewBox="0 0 8 8" refX="7" refY="4" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L8 4L0 8z" fill="{arrow}"/></marker></defs>
 <text x="{PAD}" y="62" class="t">KNODE REPOSITORIES</text>
-{labels}{"".join(edges)}{"".join(boxes)}</svg>
+{labels}{lines}{"".join(boxes)}</svg>
 '''
-    OUT.write_text(svg)
-    print(f"wrote {OUT.relative_to(ROOT.parent)}: {len(repos)} repositories")
+        (OUT / f"map-{theme}.svg").write_text(svg)
+    print(f"wrote profile/map-dark.svg and profile/map-light.svg: {len(repos)} repositories")
 
 
 if __name__ == "__main__":

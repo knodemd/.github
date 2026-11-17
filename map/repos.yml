@@ -20,7 +20,7 @@ repos:
     what: Knode Cloud
     group: product
     uses: [knode]
-    planned: v0.4
+    planned: v0.5
   - name: homebrew-tap
     icon: terminal
     what: brew install
